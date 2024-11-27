@@ -1,5 +1,4 @@
 import "./App.css";
-import Card from "./Card";
 import OldCard from "./OldCard";
 
 function App() {
