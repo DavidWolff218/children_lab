@@ -1,6 +1,5 @@
 import "./App.css";
-import Card from "./Card";
-import OldCard from "./OldCard";
+import NewCard from "./NewCard";
 
 function App() {
 
@@ -18,22 +17,52 @@ function App() {
 
   return (
     <div className="container">
-      <div className="column">
-        <h2>Meet the Team</h2>
-        <OldCard name={"Waldo"} quote={"I'll find you a home before you find me!"} memberImg={"https://shorturl.at/jSZkp"} buttonText={"Email Team Member"} onClick={memberOnClick}/>
-        <OldCard name={"Pennywise"} quote={"Float into your dream home with me!"} memberImg={"https://shorturl.at/oloTY"} buttonText={"Email Team Member"} onClick={memberOnClick}/>
-      </div>
-      <div className="column">
-        <h2>View Our Properties</h2>
-        <OldCard addressLine1={"124 Conch Street"} addressLine2={"Bikini Bottom, Pacific Ocean"} listingImg={"https://shorturl.at/qSoz2"} buttonText={"Visit Property Page"} onClick={propertyOnClick}/>
-        <OldCard addressLine1={"742 Evergreen Terrace"} addressLine2={"Some State, USA"} listingImg={"https://shorturl.at/jAfMi"} buttonText={"Visit Property Page"} onClick={propertyOnClick}/>
-      </div>
-      <div className="column">
-        <h2>Social Media Feed</h2>
-        <OldCard buttonText={"Go To Site"} icon={"https://cdn-icons-png.flaticon.com/512/3938/3938028.png"} feed={"Newest Post..."} onClick={socialOnClick}/>
-        <OldCard buttonText={"Go To Site"} icon={"https://1000logos.net/wp-content/uploads/2017/10/Vine-logo.png"} feed={"Newest Post..."} onClick={socialOnClick}/>
-      </div>
+    <div className="column">
+      <h2>Meet the Team</h2>
+      <NewCard onClick={memberOnClick} buttonText="Email Team Member">
+        <div className="name">
+          <h3>Waldo</h3>
+          <h4>I'll find you a home before you find me!</h4>
+        </div>
+        <img src="https://shorturl.at/jSZkp" alt="Waldo" className="image" />
+      </NewCard>
+      <NewCard onClick={memberOnClick} buttonText="Email Team Member">
+        <div className="name">
+          <h3>Pennywise</h3>
+          <h4>Float into your dream home with me!</h4>
+        </div>
+        <img src="https://shorturl.at/oloTY" alt="Pennywise" className="image" />
+      </NewCard>
     </div>
+    <div className="column">
+      <h2>View Our Properties</h2>
+      <NewCard onClick={propertyOnClick} buttonText="Visit Property Page">
+        <address className="address">
+          124 Conch Street<br />
+          Bikini Bottom, Pacific Ocean
+        </address>
+        <img src="https://shorturl.at/qSoz2" alt="Property" className="image" />
+      </NewCard>
+      <NewCard onClick={propertyOnClick} buttonText="Visit Property Page">
+        <address className="address">
+          742 Evergreen Terrace<br />
+          Some State, USA
+        </address>
+        <img src="https://shorturl.at/jAfMi" alt="Property" className="image" />
+      </NewCard>
+    </div>
+    <div className="column">
+      <h2>Social Media Feed</h2>
+      <NewCard onClick={socialOnClick} buttonText="Go To Site">
+        <img src="https://cdn-icons-png.flaticon.com/512/3938/3938028.png" alt="Social Media Icon" className="icon" />
+        <span className="feed">Newest Post...</span>
+      </NewCard>
+      <NewCard onClick={socialOnClick} buttonText="Go To Site">
+        <img src="https://1000logos.net/wp-content/uploads/2017/10/Vine-logo.png" alt="Social Media Icon" className="icon" />
+        <span className="feed">Newest Post...</span>
+      </NewCard>
+    </div>
+  </div>
   );
 };
 
