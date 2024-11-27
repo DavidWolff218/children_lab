@@ -1,10 +1,12 @@
 function OldCard({
   name,
+  memberImg,
   quote,
   addressLine1,
   addressLine2,
   image,
   icon,
+  feed,
   onClick,
   buttonText,
 }) {
@@ -17,7 +19,9 @@ function OldCard({
           {addressLine2}
         </address>
       )}
-      <img className='image' src={image}/>
+      {icon && <img className='icon' src={icon} alt='social media icon'/>}
+      {feed && <span className='feed'>{feed}</span>}
+      {image && <img className='image' src={image} alt='house listing'/>}
       <button className="button" onClick={onClick}>
         {buttonText}
       </button>
