@@ -34,6 +34,7 @@ function App() {
         <img src="https://shorturl.at/oloTY" alt="Pennywise" className="image" />
       </NewCard>
     </div>
+
     <div className="column">
       <h2>View Our Properties</h2>
       <NewCard onClick={propertyOnClick} buttonText="Visit Property Page">
@@ -51,14 +52,23 @@ function App() {
         <img src="https://shorturl.at/jAfMi" alt="Property" className="image" />
       </NewCard>
     </div>
+
     <div className="column">
       <h2>Social Media Feed</h2>
       <NewCard onClick={socialOnClick} buttonText="Go To Site">
-        <img src="https://cdn-icons-png.flaticon.com/512/3938/3938028.png" alt="Social Media Icon" className="icon" />
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3938/3938028.png"
+          alt="Social Media Icon"
+          className="icon"
+        />
         <span className="feed">Newest Post...</span>
       </NewCard>
       <NewCard onClick={socialOnClick} buttonText="Go To Site">
-        <img src="https://1000logos.net/wp-content/uploads/2017/10/Vine-logo.png" alt="Social Media Icon" className="icon" />
+        <img
+          src="https://1000logos.net/wp-content/uploads/2017/10/Vine-logo.png"
+          alt="Social Media Icon"
+          className="icon"
+        />
         <span className="feed">Newest Post...</span>
       </NewCard>
     </div>

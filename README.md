@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+## Setup Instructions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- **After forking and cloning the repository:**
+  1. Navigate to the project directory:
+     ```bash
+     cd <project-folder-name>
+     ```
+  2. Install dependencies:
+     ```bash
+     npm install
+     ```
+  3. Start the development server:
+     ```bash
+     npm start
+     ```
+<br><br/>
+# **Passing Information with Children in React**
 
-## Available Scripts
+When first learning React, one of the early concepts you'll encounter is the use of **props** to pass data from a parent component to its child components. Props are a fundamental part of how React enables reusable and modular code, setting it apart from vanilla JavaScript.
 
-In the project directory, you can run:
+However, there's another powerful way to pass content to child components: the **children** prop. This approach allows you to embed data or JSX directly within the child component's tags. 
 
-### `npm start`
+While props remain a versatile tool for explicit data transfer, **children** can sometimes make your code more intuitive and easier to read.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In this lab, we'll explore how to use **children** effectively and when it might be a better choice than props.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Got it! Here’s the section reformatted for your README:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# **Conditional Rendering and Prop-Heavy Components**
 
-### `npm run build`
+Let's head over into `App.jsx` and see how things are being rendered for the Real Estate site we're building. We have a container `div` with a few column `div`s inside. For simplicity, I’ve avoided creating additional child components for each of the three separate columns, but in a real scenario, I’d usually do that. Also, since we're not making fetch requests, the data is mostly hardcoded, though this can be viewed as pulling data in from state.
+Now, we are using a componet called OldCard, which we realize we like the design of so much, that we are going to use it in all diffferent areas of the page. Since they are all tasked with very differnt things, like rendering pictures, or passing along a Name etc, they have to have the ability to take in a lot of different props. 
+If we head over to OldCard.jsx now we can see whats happening. We have a whole list of props that they can accept, but because not all use cases of this componet will have those props, we are going to rely on conditonal rendering to get this to work.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> **Side Note:** How are we conditionally rendering something with `{feed && <span className="feed">{feed}</span>}`?   
+> [See below for more info](#conditional-rendering-in-jsx)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Currently, this component has a lot of logic and feels cluttered. If we decide to use it for something else in the future, we'll need to add even more logic. But don't worry—there's another way to handle this!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Exploring a New Approach: Using `children` in React
 
-### `npm run eject`
+In this section, we'll transition to a new branch in your repository called `children`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+We'll leave the old code and OldCard component in place as a reference so you can see the original HTML structure and logic.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Unlike traditional props, which pass explicit values to components, the children prop allows us to embed JSX directly inside a component's tags. This approach provides more flexibility and can help simplify your code, especially when dealing with dynamic layouts or reusable components.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+We'll start by setting up the "Meet the Team" column using the NewCard component. Instead of using a self-closing tag, we'll include the component with opening and closing tags to add content within it.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```jsx
+// App.jsx
+<div className="column">
+  <h2>Meet the Team</h2>
+  <NewCard>
+  </NewCard>
+</div>
+```
 
-## Learn More
+Now, using the commented-out OldCard props and the HTML structure from the OldCard component, we will replicate the necessary elements for the name, quote, and image. However, instead of using props, we’ll hardcode the information directly into the NewCard component.
+**Don’t worry about the button part just yet; we will get back to that later.**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```jsx
+// App.jsx
+<NewCard >
+  <div className="name">
+    <h3>Waldo</h3>
+    <h4>I'll find you a home before you find me!</h4>
+  </div>
+  <img
+    className="image"
+    src="https://shorturl.at/jSZkp"
+    alt="teammember"
+  />
+</NewCard>
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Update NewCard to Receive and Render Children
 
-### Code Splitting
+If we check the page now, we can see that the card component is being rendered on the screen, but none of the data is showing up. This happens because the `NewCard` component isn’t yet set up to receive the `children`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Unlike with props, we don’t need to explicitly define a key in the parent to pass down the data. The JSX and HTML between the opening and closing tags of the `NewCard` component are already being passed as `children`.
 
-### Analyzing the Bundle Size
+To fix this, let's go into the `NewCard` component and set it up to receive and display `children`. Similar to props, we'll destructure `children` directly in the argument list of the component using curly brackets. After that, we just need to include `{children}` in the JSX to render the content.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```jsx
+// NewCard.jsx
+const NewCard = ({ children }) => {
+  return (
+    <div className="new-card">
+      {children}
+    </div>
+  );
+};
 
-### Making a Progressive Web App
+export default NewCard;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+>Remember, when working with **props**, you can give them any name you want. However, when using this method with `children`, you **must** use the word `children` in the child component to access the passed content.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Passing Down Props for Button Functionality
 
-### Deployment
+On our webpage, we should see most of the content being rendered, but we still need to add a functional button. While we're primarily passing content down as **children**, we can still pass specific props for elements like the button.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+We'll modify the parent to pass the **buttonText** and **onClick** callback as named props while still wrapping most of the content as **children**.
 
-### `npm run build` fails to minify
+```jsx
+// App.jsx
+<div className="column">
+  <h2>Meet the Team</h2>
+  <NewCard
+    buttonText="Email Team Member"
+    onClick={memberOnClick}
+  >
+    <h3>Waldo</h3>
+    <h4>I'll find you a home before you find me!</h4>
+    <img className="image" src="https://shorturl.at/jSZkp" alt="team member" />
+    <p>Waldo is an expert in finding hidden gems in the real estate market.</p>
+  </NewCard>
+</div>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Inside the NewCard component, we'll add a button that uses the props buttonText and onClick while keeping the rest of the content dynamic through children.
+
+```jsx
+//NewCard.jsx
+function NewCard({
+  children,
+  onClick,
+  buttonText,
+}) {
+
+  return (
+    <div className="card">
+      {children}
+      <button className="button" onClick={onClick}>
+        {buttonText}
+      </button>
+    </div>
+  );
+}
+```
+
+## Wrapping Up
+
+If we check our page now, we should see a fully rendered and functional card! 🎉 
+
+This implementation demonstrates how to combine **children** for dynamic content with regular props for specific functionality, like the button in this example. 
+
+Try to replicate this setup with the other cards to get more practice passing down both **children** and **props** effectively.
+
+If you run into any issues, check out the **solution branch** for guidance!
+
+
+## Conditional Rendering in JSX
+
+In React, the syntax `{feed && <span className="feed">{feed}</span>}` uses JavaScript's logical AND (`&&`) operator for conditional rendering. Here's how it works:
+
+- If `feed` is truthy (not `null`, `undefined`, `false`, or `0`), React evaluates and renders the `<span />` element.
+- If `feed` is falsy, nothing is rendered.
+
+This shorthand helps keep your code concise by avoiding traditional `if` statements. 
