@@ -29,7 +29,7 @@ Got it! Here’s the section reformatted for your README:
 
 # **Conditional Rendering and Prop-Heavy Components**
 
-Let's head over into App.jsx and see how things are being rendered for this Real Estate company we are building a site for. We have a div container and a few column divs in there. (Now for the sake of keeping things easy, I decided not to make more child components, but usually I would do that for the three sepearte columns. Also, since we aren't making any fetch requests, things are mostly hard coded in, but I would view it the same as puling data in from state.)
+Let's head over into `App.jsx` and see how things are being rendered for the Real Estate site we're building. We have a container `div` with a few column `div`s inside. For simplicity, I’ve avoided creating additional child components for each of the three separate columns, but in a real scenario, I’d usually do that. Also, since we're not making fetch requests, the data is mostly hardcoded, though this can be viewed as pulling data in from state.
 Now, we are using a componet called OldCard, which we realize we like the design of so much, that we are going to use it in all diffferent areas of the page. Since they are all tasked with very differnt things, like rendering pictures, or passing along a Name etc, they have to have the ability to take in a lot of different props. 
 If we head over to OldCard.jsx now we can see whats happening. We have a whole list of props that they can accept, but because not all use cases of this componet will have those props, we are going to rely on conditonal rendering to get this to work.
 
