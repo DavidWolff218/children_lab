@@ -1,14 +1,8 @@
-function NewCard({
-  onClick,
-  buttonText,
-}) {
+function NewCard() {
 
   return (
     <div className="card">
 
-      <button className="button" onClick={onClick}>
-        {buttonText}
-      </button>
     </div>
   );
 }
