@@ -24,9 +24,6 @@ While props remain a versatile tool for explicit data transfer, **children** can
 
 In this lab, we'll explore how to use **children** effectively and when it might be a better choice than props.
 
-
-Got it! Here’s the section reformatted for your README:
-
 # **Conditional Rendering and Prop-Heavy Components**
 
 Let's head over into `App.jsx` and see how things are being rendered for the Real Estate site we're building. We have a container `div` with a few column `div`s inside. For simplicity, I’ve avoided creating additional child components for each of the three separate columns, but in a real scenario, I’d usually do that. Also, since we're not making fetch requests, the data is mostly hardcoded, though this can be viewed as pulling data in from state.
