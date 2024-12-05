@@ -27,8 +27,8 @@ In this lab, we'll explore how to use **children** effectively and when it might
 # **Conditional Rendering and Prop-Heavy Components**
 
 Let's head over into `App.jsx` and see how things are being rendered for the Real Estate site we're building. We have a container `div` with a few column `div`s inside. For simplicity, I’ve avoided creating additional child components for each of the three separate columns, but in a real scenario, I’d usually do that. Also, since we're not making fetch requests, the data is mostly hardcoded, though this can be viewed as pulling data in from state.
-Now, we are using a componet called OldCard, which we realize we like the design of so much, that we are going to use it in all diffferent areas of the page. Since they are all tasked with very differnt things, like rendering pictures, or passing along a Name etc, they have to have the ability to take in a lot of different props. 
-If we head over to OldCard.jsx now we can see whats happening. We have a whole list of props that they can accept, but because not all use cases of this componet will have those props, we are going to rely on conditonal rendering to get this to work.
+Now, we are using a component called OldCard, which we realize we like the design of so much that we are going to use it in all different areas of the page. Because they are all tasked with very different things, like rendering pictures, or passing along a Name, etc., they need to have the ability to take in a lot of different props. 
+If we head over to OldCard.jsx now, we can see what's happening. We have a whole list of props that they can accept, but because not all use cases of this component will have those props, we are going to rely on conditional rendering to get this to work.
 
 > **Side Note:** How are we conditionally rendering something with `{feed && <span className="feed">{feed}</span>}`?   
 > [See below for more info](#conditional-rendering-in-jsx)
@@ -122,12 +122,21 @@ Inside the NewCard component, we'll add a button that uses the props buttonText 
 
 ```jsx
 //NewCard.jsx
-const NewCard = ({ buttonText, onClick, children }) => (
-  <div className="card">
-    {children}
-    <button onClick={onClick}>{buttonText}</button>
-  </div>
-);
+function NewCard({
+  children,
+  onClick,
+  buttonText,
+}) {
+
+  return (
+    <div className="card">
+      {children}
+      <button className="button" onClick={onClick}>
+        {buttonText}
+      </button>
+    </div>
+  );
+}
 ```
 
 ## Wrapping Up
@@ -149,3 +158,7 @@ In React, the syntax `{feed && <span className="feed">{feed}</span>}` uses JavaS
 - If `feed` is falsy, nothing is rendered.
 
 This shorthand helps keep your code concise by avoiding traditional `if` statements. 
+
+
+---
+If you have any feedback or questions, feel free to contact me at harmonywolff@gmail.com
